@@ -17,7 +17,7 @@ export const dashboardService = {
     getMovesSummary: async (startDate?: string, endDate?: string): Promise<ApiResponse<MovesSummary>> => {
         try {
             const api = await getServerApi();
-            const response = await api.get('/api/dashboard/moves-summary', {
+            const response = await api.get('/api/dashboard/stock-movements-summary', {
                 params: { startDate, endDate }
             });
             return response.data;
@@ -29,7 +29,7 @@ export const dashboardService = {
     getMovesGraph: async (startDate?: string, endDate?: string): Promise<ApiListResponse<MoveGraphItem>> => {
         try {
             const api = await getServerApi();
-            const response = await api.get('/api/dashboard/moves-graph', {
+            const response = await api.get('/api/dashboard/stock-movements-graph', {
                 params: { startDate, endDate }
             });
             return response.data;
@@ -41,7 +41,7 @@ export const dashboardService = {
     getLowStock: async (): Promise<ApiListResponse<Product>> => {
         try {
             const api = await getServerApi();
-            const response = await api.get('/api/dashboard/low-stock');
+            const response = await api.get('/api/dashboard/low-stock-products');
             return response.data;
         } catch (error) {
             return { error: 'Erro ao buscar produtos com estoque baixo', data: [] };

@@ -1,5 +1,5 @@
 export type InventoryValue = {
-    totalValue: number;
+    inventoryValue: number;
 };
 
 export type MoveSummaryItem = {

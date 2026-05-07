@@ -8,7 +8,7 @@ export const moveService = {
             const params: Record<string, string | number> = { offset, limit };
             if (productId) params.productId = productId;
 
-            const response = await api.get('/api/moves', { params });
+            const response = await api.get('/api/stock-movements', { params });
             return response.data;
         } catch (error: any) {
             return { error: error.response?.data?.error || 'Erro ao buscar movimentações', data: [] };
@@ -18,7 +18,7 @@ export const moveService = {
     createMove: async (data: MovePayload) => {
         try {
             const api = await getServerApi();
-            const response = await api.post('/api/moves', data);
+            const response = await api.post('/api/stock-movements', data);
             return response.data;
         } catch (error: any) {
             return { error: error.response?.data?.error || 'Erro ao registrar movimentação', data: null };

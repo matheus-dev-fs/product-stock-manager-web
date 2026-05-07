@@ -80,7 +80,7 @@ export async function searchProductsAction(term: string) {
   const api = await getServerApi()
   try {
     const response = await api.get('/api/products', {
-      params: { name: term, limit: 20 }
+      params: { search: term, limit: 20 }
     });
     return { data: response.data?.data || [] };
   } catch (error: any) {

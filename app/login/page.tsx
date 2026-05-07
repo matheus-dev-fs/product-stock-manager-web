@@ -12,7 +12,7 @@ export default function LoginPage() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-muted/50">
       <div className="w-full max-w-sm p-6 bg-background rounded-lg border shadow-sm">
-        <h1 className="text-2xl font-bold mb-6 text-center">B7Estoque Login</h1>
+        <h1 className="text-2xl font-bold mb-6 text-center">Login</h1>
         
         <form action={action} className="space-y-4">
           <div className="space-y-2">

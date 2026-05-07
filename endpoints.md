@@ -401,7 +401,7 @@ All protected routes require the `Authorization` header:
 
 ### List Stock Movements
 - **Method:** `GET`
-- **Endpoint:** `/api/moves`
+- **Endpoint:** `/api/stock-movements`
 - **Query Parameters:**
   - `productId` (optional): Filter by Product UUID.
   - `limit` (optional): default 10.
@@ -427,7 +427,7 @@ All protected routes require the `Authorization` header:
 
 ### Add Stock Movement
 - **Method:** `POST`
-- **Endpoint:** `/api/moves`
+- **Endpoint:** `/api/stock-movements`
 - **Body:**
   ```json
   {
@@ -472,7 +472,7 @@ All protected routes require the `Authorization` header:
 
 ### Get Moves Summary
 - **Method:** `GET`
-- **Endpoint:** `/api/dashboard/moves-summary`
+- **Endpoint:** `/api/dashboard/stock-movements-summary`
 - **Query Parameters:**
   - `startDate` (optional): ISO date string.
   - `endDate` (optional): ISO date string.
@@ -490,7 +490,7 @@ All protected routes require the `Authorization` header:
 
 ### Get Moves Graph (Daily Out)
 - **Method:** `GET`
-- **Endpoint:** `/api/dashboard/moves-graph`
+- **Endpoint:** `/api/dashboard/stock-movements-graph`
 - **Query Parameters:**
   - `startDate` (optional): ISO date string.
   - `endDate` (optional): ISO date string.
@@ -508,7 +508,7 @@ All protected routes require the `Authorization` header:
 
 ### Get Low Stock Products
 - **Method:** `GET`
-- **Endpoint:** `/api/dashboard/low-stock`
+- **Endpoint:** `/api/dashboard/low-stock-products`
 - **Description:** List products where quantity <= minimumQuantity * 1.1.
 - **Response:**
   ```json

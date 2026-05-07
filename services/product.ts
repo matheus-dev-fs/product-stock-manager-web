@@ -5,7 +5,7 @@ export const productService = {
         try {
             const api = await getServerApi();
             const response = await api.get('/api/products', {
-                params: { offset, limit, name }
+                params: { offset, limit, search: name }
             });
             return response.data;
         } catch (error) {

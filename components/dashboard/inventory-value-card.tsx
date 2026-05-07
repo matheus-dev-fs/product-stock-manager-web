@@ -5,7 +5,7 @@ import { formatCurrency } from "@/lib/utils";
 
 export async function InventoryValueCard() {
     const { data } = await dashboardService.getInventoryValue();
-    const value = data?.totalValue || 0;
+    const value = data?.inventoryValue|| 0;
 
     return (
         <SummaryCard

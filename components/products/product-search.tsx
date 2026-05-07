@@ -25,6 +25,7 @@ export const ProductSearch = () => {
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
+            console.log("Search term submitted:", term);    
             handleSearch();
         }
     };

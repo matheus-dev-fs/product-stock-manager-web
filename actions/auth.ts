@@ -22,18 +22,25 @@ export async function loginAction(prevState: any, formData: FormData) {
       return { error }
     }
 
-    const token = data?.token
+    const accessToken = data?.accessToken
+    const refreshToken = data?.refreshToken
 
-    if (!token) {
-      return { error: 'Token not received from server' }
+    if (!accessToken || !refreshToken) {
+      return { error: 'Tokens not received from server' }
     }
 
-    // Save token in HttpOnly cookie
+    // Save tokens in HttpOnly cookies
     const cookieStore = await cookies()
-    cookieStore.set('session_token', token, {
+    cookieStore.set('access_token', accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      maxAge: 60 * 60 * 24 * 7, // 1 week
+      maxAge: 60 * 60, // 1 hour
+      path: '/',
+    })
+    cookieStore.set('refresh_token', refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      maxAge: 60 * 60 * 24 * 30, // 30 days
       path: '/',
     })
   } catch (err: any) {
@@ -48,6 +55,16 @@ export async function loginAction(prevState: any, formData: FormData) {
 
 export async function logoutAction() {
   const cookieStore = await cookies()
-  cookieStore.delete('session_token')
+  const refreshToken = cookieStore.get('refresh_token')?.value
+
+  try {
+    const api = await getServerApi()
+    await api.post('/api/auth/logout', { refreshToken })
+  } catch (e) {
+    // ignore errors during logout request
+  }
+
+  cookieStore.delete('access_token')
+  cookieStore.delete('refresh_token')
   redirect('/login')
 }

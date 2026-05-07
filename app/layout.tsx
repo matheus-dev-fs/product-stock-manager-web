@@ -3,7 +3,8 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
-  title: "B7Estoque"
+  title: "Sistema de Gerenciamento de Estoque",
+  description: "Gerencie seu estoque de forma eficiente e fácil",
 };
 
 export default function RootLayout({
