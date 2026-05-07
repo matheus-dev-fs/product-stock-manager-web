@@ -9,17 +9,6 @@ import { User } from "@/types/user";
 import Link from "next/link";
 import { authService } from "@/services/auth";
 
-const pageTitle = (
-    <PageTitle
-        title="Usuários"
-        rightSide={
-            <Link href="/users/add">
-                <Button>Novo Usuário</Button>
-            </Link>
-        }
-    />
-);
-
 type Props = {
     searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
@@ -38,6 +27,22 @@ export default async function Page({ searchParams }: Props) {
     const count = hasMore ? (page * limit) + 1 : (page - 1) * limit + users.length;
 
     const { data: loggedUser } = await authService.getMe();
+    const canManageUsers = loggedUser?.isAdmin || false;
+
+    const pageTitle = (
+        <PageTitle
+            title="Usuários"
+            rightSide={
+                canManageUsers ? (
+                    <Link href="/users/add">
+                        <Button>Novo Usuário</Button>
+                    </Link>
+                ) : (
+                    <Button disabled>Novo Usuário</Button>
+                )
+            }
+        />
+    );
 
     if (users.length === 0) {
         return (
@@ -47,7 +52,7 @@ export default async function Page({ searchParams }: Props) {
                     message="Nenhum usuário cadastrado."
                     label="Novo Usuário"
                     href="/users/add"
-                    canManage={loggedUser?.isAdmin || false}
+                    canManage={canManageUsers}
                 />
             </div>
         );
@@ -63,12 +68,12 @@ export default async function Page({ searchParams }: Props) {
                         <TableHead>Nome</TableHead>
                         <TableHead>Email</TableHead>
                         <TableHead>Função</TableHead>
-                        <TableHead className="w-[150px]">Ações</TableHead>
+                        <TableHead className="w-37.5">Ações</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {users.map((item) => (
-                        <UserItem key={item.id} user={item} canManage={loggedUser?.isAdmin || false} />
+                        <UserItem key={item.id} user={item} canManage={canManageUsers} />
                     ))}
                 </TableBody>
             </Table>

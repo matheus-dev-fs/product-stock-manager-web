@@ -12,7 +12,7 @@ export function EmptyState({ message, label, href, canManage }: Props) {
     return (
         <div className="flex flex-col items-center justify-center p-8 text-center text-muted-foreground">
             <p className="mb-4">{message}</p>
-            {canManage === undefined || canManage === true ? (
+            {canManage === undefined || canManage ? (
                 <Link href={href}>
                     <Button>{label}</Button>
                 </Link>
