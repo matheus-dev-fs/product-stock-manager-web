@@ -47,6 +47,7 @@ export default async function Page({ searchParams }: Props) {
                     message="Nenhum usuário cadastrado."
                     label="Novo Usuário"
                     href="/users/add"
+                    canManage={loggedUser?.isAdmin || false}
                 />
             </div>
         );
@@ -67,7 +68,7 @@ export default async function Page({ searchParams }: Props) {
                 </TableHeader>
                 <TableBody>
                     {users.map((item) => (
-                        <UserItem key={item.id} user={item} canManage={loggedUser.isAdmin} />
+                        <UserItem key={item.id} user={item} canManage={loggedUser?.isAdmin || false} />
                     ))}
                 </TableBody>
             </Table>
