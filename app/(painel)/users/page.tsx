@@ -7,6 +7,7 @@ import { Table, TableBody, TableHead, TableHeader, TableRow } from "@/components
 import { userService } from "@/services/user";
 import { User } from "@/types/user";
 import Link from "next/link";
+import { authService } from "@/services/auth";
 
 const pageTitle = (
     <PageTitle
@@ -36,6 +37,8 @@ export default async function Page({ searchParams }: Props) {
     const users = hasMore ? allFetchedUsers.slice(0, limit) : allFetchedUsers;
     const count = hasMore ? (page * limit) + 1 : (page - 1) * limit + users.length;
 
+    const { data: loggedUser } = await authService.getMe();
+
     if (users.length === 0) {
         return (
             <div>
@@ -64,7 +67,7 @@ export default async function Page({ searchParams }: Props) {
                 </TableHeader>
                 <TableBody>
                     {users.map((item) => (
-                        <UserItem key={item.id} user={item} />
+                        <UserItem key={item.id} user={item} canManage={loggedUser.isAdmin} />
                     ))}
                 </TableBody>
             </Table>

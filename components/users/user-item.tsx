@@ -11,9 +11,10 @@ import { ConfirmDeleteDialog } from "@/components/confirm-delete-dialog";
 
 type Props = {
     user: User;
+    canManage: boolean;
 };
 
-export const UserItem = ({ user }: Props) => {
+export const UserItem = ({ user, canManage }: Props) => {
     const [isDeleting, setIsDeleting] = useState(false);
 
     const handleDelete = async () => {
@@ -45,7 +46,7 @@ export const UserItem = ({ user }: Props) => {
             <TableCell>{user.email}</TableCell>
             <TableCell>{user.isAdmin ? "Admin" : "Usuário"}</TableCell>
             <TableCell className="flex items-center gap-2">
-                {user.isAdmin ?
+                {canManage ?
                     (
                         <Link href={`/users/${user.id}`}>
                             <Button>
@@ -62,7 +63,7 @@ export const UserItem = ({ user }: Props) => {
                     name={user.name}
                     onConfirm={handleDelete}
                     isDeleting={isDeleting}
-                    disabled={!user.isAdmin}
+                    disabled={!canManage}
                 />
             </TableCell>
         </TableRow>
