@@ -9,7 +9,7 @@ type Props = {
 export const MoveItem = ({ move }: Props) => {
     return (
         <TableRow>
-            <TableCell>{new Date(move.date || move.createdAt || '').toLocaleDateString('pt-BR')}</TableCell>
+            <TableCell>{new Date(move.createdAt || '').toLocaleDateString('pt-BR')}</TableCell>
             <TableCell>
                 <span className={move.type === 'in' ? "text-green-600 font-medium" : "text-red-600 font-medium"}>
                     {move.type === 'in' ? 'Entrada' : 'Saída'}
