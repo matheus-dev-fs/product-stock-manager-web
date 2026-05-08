@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { AuthResponse } from '@/types/auth'
+import { ApiResponse } from '@/types/api'
 
 function decodeJwtPayload(token: string): { exp?: number } | null {
     try {
@@ -32,7 +34,7 @@ function isTokenExpired(token: string | undefined): boolean {
     return payload.exp * 1000 <= Date.now();
 }
 
-async function refreshSession(refreshToken: string) {
+async function refreshSession(refreshToken: string): Promise<Partial<AuthResponse> | null> {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/refresh`, {
         method: 'POST',
         headers: {
@@ -45,7 +47,7 @@ async function refreshSession(refreshToken: string) {
         return null;
     }
 
-    const payload = await response.json();
+    const payload: ApiResponse<AuthResponse> = await response.json();
     return payload?.data ?? null;
 }
 

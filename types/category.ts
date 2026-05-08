@@ -1,7 +1,6 @@
 export type Category = {
     id: string;
     name: string;
-    productCount?: number;
-    createdAt?: string;
-    updatedAt?: string;
+    productCount?: number; // only when includeProductCount=true in query
+    createdAt: string; // ISO 8601 timestamp
 };

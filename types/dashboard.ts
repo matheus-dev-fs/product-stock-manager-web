@@ -1,9 +1,9 @@
 export type InventoryValue = {
-    inventoryValue: number;
+    inventoryValue: number; // in cents
 };
 
 export type MoveSummaryItem = {
-    value: number;
+    value: number; // in cents
     count: number;
 };
 
@@ -13,7 +13,7 @@ export type MovesSummary = {
 };
 
 export type MoveGraphItem = {
-    date: string;
-    totalValue: number;
+    date: string; // YYYY-MM-DD format
+    totalValue: number; // in cents
 };
 

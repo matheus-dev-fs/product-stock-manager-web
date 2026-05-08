@@ -3,6 +3,8 @@
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { getServerApi } from '@/lib/server-api'
+import { AuthResponse } from '@/types/auth'
+import { ApiResponse } from '@/types/api'
 
 export async function loginAction(prevState: any, formData: FormData) {
     const email = formData.get('email')
@@ -11,7 +13,7 @@ export async function loginAction(prevState: any, formData: FormData) {
     const api = await getServerApi()
 
     try {
-        const response = await api.post('/api/auth/login', {
+        const response = await api.post<ApiResponse<AuthResponse>>('/api/auth/login', {
             email,
             password,
         })
@@ -22,12 +24,12 @@ export async function loginAction(prevState: any, formData: FormData) {
             return { error }
         }
 
-        const accessToken = data?.accessToken
-        const refreshToken = data?.refreshToken
-
-        if (!accessToken || !refreshToken) {
+        if (!data?.accessToken || !data?.refreshToken) {
             return { error: 'Tokens not received from server' }
         }
+
+        const accessToken = data.accessToken
+        const refreshToken = data.refreshToken
 
         // Save tokens in HttpOnly cookies
         const cookieStore = await cookies()

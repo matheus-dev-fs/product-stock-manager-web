@@ -19,13 +19,10 @@ import { ThemeToggle } from "./theme-toggle"
 import Link from "next/link"
 import { Button } from "./ui/button"
 import { logoutAction } from "@/actions/auth"
+import { User } from "@/types/user"
 
 type Props = {
-  user: {
-    name: string;
-    email: string;
-    avatar: string;
-  }
+  user: User;
 }
 
 export function AppSidebar({ user }: Props) {
