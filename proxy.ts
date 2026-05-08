@@ -100,7 +100,7 @@ export async function proxy(request: NextRequest) {
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'lax',
         path: '/',
-        maxAge: 60 * 60,
+        maxAge: 60 * 15,
     });
 
     return response;
