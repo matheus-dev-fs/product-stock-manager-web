@@ -9,6 +9,14 @@ export function cn(...inputs: ClassValue[]) {
 export const toCents = (amount: number) => Math.round(amount * 100);
 export const fromCents = (cents: number) => cents / 100;
 
+export const stringToNumber = (value: string | number | undefined | null): number => {
+  if (value === undefined || value === null || value === '') {
+    return 0;
+  }
+  const num = Number(value);
+  return isNaN(num) ? 0 : num;
+}
+
 export const formatCurrency = (cents: number) => {
   return new Intl.NumberFormat("pt-BR", {
     style: "currency",

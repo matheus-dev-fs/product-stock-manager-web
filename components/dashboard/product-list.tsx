@@ -1,6 +1,7 @@
 import { Product } from "@/types/product";
 import { cn } from "@/lib/utils";
-import { formatCurrency } from "@/lib/utils";
+import { formatCurrency, stringToNumber } from "@/lib/utils";
+
 
 interface ProductListProps {
     title: string;
@@ -26,14 +27,14 @@ export function ProductList({ title, description, products, emptyMessage = "Nenh
                                 <div>
                                     <p className="font-medium text-sm">{product.name}</p>
                                     <p className="text-xs text-muted-foreground">
-                                        Qtd: {product.quantity} {product.unitType}
+                                        Qtd: {stringToNumber(product.quantity)} {product.unitType}
                                     </p>
                                 </div>
                                 <div className="text-right">
-                                    <p className="font-medium text-sm">{formatCurrency(product.unitPrice)}</p>
-                                    {product.minimumQuantity > 0 && (
+                                    <p className="font-medium text-sm">{formatCurrency(stringToNumber(product.unitPrice))}</p>
+                                    {stringToNumber(product.minimumQuantity) > 0 && (
                                         <p className="text-xs text-muted-foreground">
-                                            Min: {product.minimumQuantity}
+                                            Min: {stringToNumber(product.minimumQuantity)}
                                         </p>
                                     )}
                                 </div>

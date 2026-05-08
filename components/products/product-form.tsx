@@ -14,7 +14,7 @@ import {
     Label,
 } from "@/components/ui/label";
 import { Category } from "@/types/category";
-import { fromCents } from "@/lib/utils";
+import { fromCents, stringToNumber } from "@/lib/utils";
 import { upsertProductAction } from "@/actions/product";
 import { Product } from "@/types/product";
 import { FieldError } from "@/components/field-error";
@@ -105,7 +105,7 @@ export const ProductForm = ({ categories, product }: Props) => {
                                 id="quantity"
                                 name="quantity"
                                 type="number"
-                                defaultValue={product?.quantity ?? 0}
+                                defaultValue={stringToNumber(product?.quantity)}
                             />
                             <FieldError errors={state?.fieldErrors?.quantity} />
                         </div>
@@ -115,7 +115,7 @@ export const ProductForm = ({ categories, product }: Props) => {
                                 id="minimumQuantity"
                                 name="minimumQuantity"
                                 type="number"
-                                defaultValue={product?.minimumQuantity ?? 0}
+                                defaultValue={stringToNumber(product?.minimumQuantity)}
                             />
                             <FieldError errors={state?.fieldErrors?.minimumQuantity} />
                         </div>
@@ -125,7 +125,7 @@ export const ProductForm = ({ categories, product }: Props) => {
                                 id="maximumQuantity"
                                 name="maximumQuantity"
                                 type="number"
-                                defaultValue={product?.maximumQuantity ?? 0}
+                                defaultValue={stringToNumber(product?.maximumQuantity)}
                             />
                             <FieldError errors={state?.fieldErrors?.maximumQuantity} />
                         </div>
